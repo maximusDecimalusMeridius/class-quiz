@@ -16,21 +16,25 @@ let _submitButton = document.getElementById("sub-init-button");
 
 let timer = 200;
 let gameIndex = 0;
+let numCorrect = 0;
 
 // WHEN I click the start button
 // THEN a timer starts and I am presented with a question
-// function nextQuestion();
 
 _startButton.addEventListener("click", () => {
     _welcomeWindow.style.display = "none";
     _questionWindow.style.display = "flex";
     nextCard(0);
     
-    _timer.innerText = timer;
+    _timer.innerText = timer;                           // Initialize timer
 
-    setInterval(() => {
+    setInterval(() => {                                 // setInterval function to countdown every 1s
         timer--;
         _timer.innerText = timer;
+        if(timer === 0){
+            clearInterval();
+            gameOver();
+        }
     }, "1000")
 })
 
@@ -42,7 +46,13 @@ _answerWindow.addEventListener("click", (event) => {
     if(event.target.className === "answer-items"){
         event.target.style.backgroundColor = "white";
         grader(gameIndex, event.target.value);
-        nextCard(++gameIndex);
+        gameIndex++;
+        if(gameIndex < gameDeck.length){
+            nextCard(gameIndex);
+        } else {
+            _questionWindow.style.display = "none";
+            gameOver();
+        }
     }
 })
 
@@ -66,13 +76,18 @@ function nextCard(index) {
 function grader(cardIndex, choice) {
     if(choice == gameDeck[cardIndex].correctAnswer){
         _outcomeNode.innerText = "Correctomundo!";
+        numCorrect++;
     } else {
-        _outcomeNode.innerText = "Wrong-o!";
+        _outcomeNode.innerText = "Wrong-o! 10 seconds subtracted from your time!";
+        timer -= 10;
     }
 }
 
 
+function gameOver(){
+    _scoreboardWindow.style.display = "flex";
 
+}
 
 
 
