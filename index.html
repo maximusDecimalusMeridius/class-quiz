@@ -10,11 +10,33 @@
 <body>
     <header id="header">
         <div id="view-scores" class="header-items"><a href="">View High Scores</a></div>
-        <div id="timer-display" class="header-items">Time: <span id="timer"></span></div>
+        <div id="timer-display" class="header-items">Time: <p id="timer">0</p></div>
     </header>
 
-    <main>
-        
+    <main id="main">
+        <div id="main-content">
+            <div id="welcome-window" class="main-window">
+                <h2 id="welcome-header" class="card-title">Hello and welcome to the quiz</h2>
+                <p id="welcome-p">Prepare for the hardest 20 question quiz of your life. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto ipsam provident assumenda necessitatibus vero. Dignissimos odit quod quisquam, earum blanditiis inventore vero dolores ipsam nihil.</p>
+                <button id="start-button" class="button" type="button">Click to Start</button>
+            </div>
+            <div id="question-window" class="main-window">
+                <h2 id="question" class="card-title">Sample Question</h2>
+                <ol id="answer-options">
+                    <li id="answer-item-1" class="answer-items"></li>
+                    <li id="answer-item-2" class="answer-items"></li>
+                    <li id="answer-item-3" class="answer-items"></li>
+                    <li id="answer-item-4" class="answer-items"></li>
+                </ol>
+                <div id="outcome">Right or Wrong</div>
+            </div>
+            <div id="scoreboard-window" class="main-window">
+                <h2 id="goodbye-header" class="card-title">Game Over!</h2>
+                <p id="goodbye-p">Thanks for playing!  Please enter your initials to submit your high score!</p>
+                <textarea id="initials" placeholder="XYZ"></textarea>
+                <button id="sub-init-button" class="button" type="button">Submit</button>
+            </div>
+        </div>
     </main>
 
     <footer>
