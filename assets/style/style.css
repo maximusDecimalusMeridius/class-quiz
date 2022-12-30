@@ -95,14 +95,19 @@ header {
 }
 
 #welcome-window {
-    display: none;
+    
 }
 
 #question-window {
     display: none;
 }
 
-#answer-options {
+#scoreboard-window{
+    align-items: start;
+    display: none;
+}
+
+#answer-window {
     width: 400px;
     height: 120px;
     display: grid;
@@ -121,10 +126,7 @@ header {
     background-color: var(--forest-green);
     color: white;
     font-weight: bold;
-}
-
-#scoreboard-window{
-    align-items: start;
+    cursor: pointer;
 }
 
 #goodbye-header {
@@ -135,10 +137,17 @@ header {
     padding: 3px;
 }
 
+#goodbye-footer {
+    width: 250px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 #initials {
+    display: inline-block;
     height: 25px;
     width: 50px;
-    margin-left: 20px;
     text-align: center;
     padding-top: 2px;
     font-size: 18px;
@@ -151,7 +160,7 @@ header {
 }
 
 #sub-init-button {
-    
+    display: inline-block;
 }
 
 
@@ -164,7 +173,7 @@ header {
         font-size: 20px;
     }
 
-    #answer-options {
+    #answer-window {
         height: fit-content;
         width: fit-content;
         display: flex;
