@@ -31,7 +31,7 @@ header {
 
 #timer {
     display: inline-block;
-    width: 25px;
+    width: fit-content;
     height: 25px;
     padding-top: 2px;
     text-align: center;
@@ -94,17 +94,25 @@ header {
     padding: 0px 20px;
 }
 
-#welcome-window {
-    
-}
-
+/* Hide windows on index.html load */
 #question-window {
     display: none;
 }
 
-#scoreboard-window{
+#scoreboard-window {
     align-items: start;
     display: none;
+}
+
+#hall-of-fame {
+    display: none;
+    width: 80%;
+    height: 60%;
+}
+/* */
+
+#scoreboard-window[data-gameover="true"]{
+    display: flex;
 }
 
 #answer-window {

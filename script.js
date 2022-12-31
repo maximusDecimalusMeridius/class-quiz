@@ -1,5 +1,11 @@
+// TODO: Style the table on the last page
+// TODO: Don't let player finish game if they don't answer all questions
+
 // Tying into HTML elements
 let _answerItemNodes = document.getElementsByClassName("answer-items");
+let _hallOfFame = document.getElementById("hall-of-fame");
+let _initCol = document.getElementById("init");
+let _scoreCol = document.getElementById("score");
 
 let _welcomeWindow = document.getElementById("welcome-window");
 let _questionWindow = document.getElementById("question-window");
@@ -8,34 +14,38 @@ let _scoreboardWindow = document.getElementById("scoreboard-window");
 
 let _questionNode = document.getElementById("question");
 let _outcomeNode = document.getElementById("outcome");
+let _goodbyeMessageNode = document.getElementById("goodbye-p");
 
 let _timer = document.getElementById("timer");
 let _userInitials = document.getElementById("initials");
+let _viewScoresButton = document.getElementById("view-scores");
 let _startButton = document.getElementById("start-button");
 let _submitButton = document.getElementById("sub-init-button");
+let _playAgainButton = document.getElementById("play-again-button");
 
 let timer = 200;
 let gameIndex = 0;
 let numCorrect = 0;
+let highScores = [];
 
 // WHEN I click the start button
 // THEN a timer starts and I am presented with a question
 
 _startButton.addEventListener("click", () => {
-    _welcomeWindow.style.display = "none";
-    _questionWindow.style.display = "flex";
-    nextCard(0);
-    
-    _timer.innerText = timer;                           // Initialize timer
+    startGame();
+})
 
-    setInterval(() => {                                 // setInterval function to countdown every 1s
-        timer--;
-        _timer.innerText = timer;
-        if(timer === 0){
-            clearInterval();
-            gameOver();
-        }
-    }, "1000")
+_playAgainButton.addEventListener("click", () => {
+    startGame();
+})
+
+_submitButton.addEventListener("click", () => {
+    showHighScores(_userInitials.value, numCorrect);
+})
+
+_viewScoresButton.addEventListener("click", () => {
+    timer = 0;
+    showHighScores();
 })
 
 // WHEN I answer a question
@@ -43,9 +53,11 @@ _startButton.addEventListener("click", () => {
 // function checkAnswer(selected, correct), nextQuestion()
 
 _answerWindow.addEventListener("click", (event) => {
+    console.log(event);
+    console.log(event.target);
     if(event.target.className === "answer-items"){
         event.target.style.backgroundColor = "white";
-        grader(gameIndex, event.target.value);
+        grader(gameIndex, event.target.dataset.val);
         gameIndex++;
         if(gameIndex < gameDeck.length){
             nextCard(gameIndex);
@@ -56,15 +68,29 @@ _answerWindow.addEventListener("click", (event) => {
     }
 })
 
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
+// Starts game, initializing counters and indexes
+function startGame(){
+    timer = 200;
+    gameIndex = 0;
+    numCorrect = 0;
+    _welcomeWindow.style.display = "none";                          // Disappears welcome window
+    _questionWindow.style.display = "flex";                         // Shows the question window
+    nextCard(0);                                                    // Pulls first card with index 0
+    
+    _timer.innerText = timer;                                       // Set timer to initialized value
 
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
+   let countDown = setInterval(() => {                              // setInterval function to countdown every 1s
+        if(timer === 0 || gameIndex === gameDeck.length){           // WHEN all questions are answered or the timer reaches 0
+            clearInterval(countDown);                               // THEN the game is over
+            gameOver();                                             
+        } else {
+            timer-=.01;
+            _timer.innerText = timer.toFixed(2);
+        }
+    }, "10");
+}
 
-// WHEN the game is over
-// THEN I can save my initials and score
-
+// Draw the next card based on the deck index and populate the question and answer fields with values
 function nextCard(index) {
     _questionNode.innerText = gameDeck[index].question;
     for(let i = 0; i < gameDeck[index].answerArray.length; i++){
@@ -73,6 +99,9 @@ function nextCard(index) {
     }
 }
 
+// Evaluate the question, user choice, and correct answer
+// Tally correct answers
+// Subtract 10 seconds from timer for each incorrect question
 function grader(cardIndex, choice) {
     if(choice == gameDeck[cardIndex].correctAnswer){
         _outcomeNode.innerText = "Correctomundo!";
@@ -83,9 +112,34 @@ function grader(cardIndex, choice) {
     }
 }
 
-
+// Show scoreboard window and goodbye message (new div appears in CSS with data-attribute)
+// WHEN the game is over
+// THEN I can save my initials and score
 function gameOver(){
     _scoreboardWindow.style.display = "flex";
+    _goodbyeMessageNode.innerText = `Thanks for playing! You got ${numCorrect} correct.\nPlease enter your initials below`;
+}
+
+// Add new TRs to the high score table
+// Only add a new high score if values are passed, not if user clicks "View High Scores"
+function showHighScores(inits, score) {    
+    _welcomeWindow.style.display = "none";
+    _questionWindow.style.display = "none";
+    _scoreboardWindow.style.display = "none";
+    _hallOfFame.style.display = "flex";
+    
+    if(inits != undefined){
+        let newInitEl = document.createElement("TR");
+        let newInitData = document.createTextNode(`${inits}`);
+        let newScoreEl = document.createElement("TR");
+        let newScoreData = document.createTextNode(`${score}`);
+
+        newInitEl.appendChild(newInitData);
+        newScoreEl.appendChild(newScoreData);
+
+        _initCol.appendChild(newInitEl);
+        _scoreCol.appendChild(newScoreEl);
+    }
 
 }
 

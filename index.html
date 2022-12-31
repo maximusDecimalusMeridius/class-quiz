@@ -9,7 +9,7 @@
 </head>
 <body>
     <header id="header">
-        <div id="view-scores" class="header-items"><a href="">View High Scores</a></div>
+        <div id="view-scores" class="header-items">View High Scores</div>
         <div id="timer-display" class="header-items">Time: <p id="timer">0</p></div>
     </header>
 
@@ -23,20 +23,27 @@
             <div id="question-window" class="main-window">
                 <h2 id="question" class="card-title">Sample Question</h2>
                 <ol id="answer-window">
-                    <li id="answer-item-1" class="answer-items" value="0"></li>
-                    <li id="answer-item-2" class="answer-items" value="1"></li>
-                    <li id="answer-item-3" class="answer-items" value="2"></li>
-                    <li id="answer-item-4" class="answer-items" value="3"></li>
+                    <li id="answer-item-1" class="answer-items" data-val="0"></li>
+                    <li id="answer-item-2" class="answer-items" data-val="1"></li>
+                    <li id="answer-item-3" class="answer-items" data-val="2"></li>
+                    <li id="answer-item-4" class="answer-items" data-val="3"></li>
                 </ol>
-                <div id="outcome">Right or Wrong</div>
+            <div id="outcome">Right or Wrong</div>
             </div>
             <div id="scoreboard-window" class="main-window">
                 <h2 id="goodbye-header" class="card-title">Game Over!</h2>
-                <p id="goodbye-p">Thanks for playing!  Please enter your initials to submit your high score!</p>
+                <p id="goodbye-p"></p>
                 <div id="goodbye-footer">
                     <textarea id="initials" placeholder="XYZ"></textarea>
                     <button id="sub-init-button" class="button" type="button">Submit</button>
                 </div>
+            </div>
+            <div id="hall-of-fame" class="main-window">
+                <table>
+                    <td id="init">Initials</td>
+                    <td id="score">Score</td>
+                </table>
+                <button id="play-again-button" class="button" type="button">Play Again!</button>
             </div>
         </div>
     </main>
