@@ -208,6 +208,17 @@ header {
     display: inline-block;
 }
 
+.hof-header {
+    font-size: 24px;
+}
+
+#init, #score {
+    height: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: left;
+}
+
 @media screen and (max-width: 820px){
     body {
         width: 90%;

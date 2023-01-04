@@ -25,6 +25,7 @@ let _playAgainButton = document.getElementById("play-again-button");
 
 let timer = 200;
 let gameIndex = 0;
+let numCorrect = 0;
 let highScores = [];
 
 // WHEN I click the start button
@@ -40,16 +41,14 @@ _playAgainButton.addEventListener("click", () => {
 })
 
 _submitButton.addEventListener("click", () => {
-    showHighScores(_userInitials.value, numCorrect);
+    tallyScore(_userInitials.value, timer);
+    showHighScores();
 })
 
 _viewScoresButton.addEventListener("click", () => {
     timer = 0;
     _timer.textContent = 0;
-    _welcomeWindow.style.display = "none";
-    _questionWindow.style.display = "none";
-    _scoreboardWindow.style.display = "none";
-    _hallOfFame.style.display = "flex";
+    showHighScores();
 })
 
 // WHEN I answer a question
@@ -70,11 +69,18 @@ _answerWindow.addEventListener("click", (event) => {
     }
 })
 
-// Starts game, initializing counters and indexes
-function startGame(){
+function init(){
     timer = 200;
     gameIndex = 0;
     numCorrect = 0;
+    if(localStorage.getItem("highScores") === null){
+        localStorage.setItem("highScores", highScores);
+    }
+}
+
+// Starts game, initializing counters and indexes
+function startGame(){
+    init();
     _welcomeWindow.style.display = "none";                          // Disappears welcome window
     _questionWindow.style.display = "flex";                         // Shows the question window
     nextCard(0);                                                    // Pulls first card with index 0
@@ -127,22 +133,46 @@ function grader(cardIndex, choice) {
 // THEN I can save my initials and score
 function gameOver(){
     _scoreboardWindow.style.display = "flex";
-    _goodbyeMessageNode.innerText = `Thanks for playing! Your time was ${timer.toFixed(2)}.\nPlease enter your initials below`;
+    _goodbyeMessageNode.innerText = `Thanks for playing! You got ${numCorrect} correct out of ${gameDeck.length}.\nYour time was ${timer.toFixed(2)}.\nPlease enter your initials below`;
 }
 
 // Add new TRs to the high score table
 // Only add a new high score if values are passed, not if user clicks "View High Scores"
-function showHighScores(inits, score) {    
+
+function tallyScore(inits, time){
+    let fixedTime = parseFloat(time.toFixed(2));
+
+    if(highScores.length == 0 || fixedTime < highScores[highScores.length - 1][1]) {
+        console.log("TRUE");
+        highScores.push([inits, fixedTime]);
+    } else if(fixedTime > highScores[0][1]){
+        highScores.splice(0, 0, [inits, fixedTime]);
+    } else {
+        for(let i = 1; i < highScores.length; i++){
+            if(fixedTime > highScores[i][1]){
+                highScores.splice(i, 0, [inits, fixedTime]);
+                break;
+            }
+        }
+    }
+
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+}
+
+function showHighScores() {    
     _welcomeWindow.style.display = "none";
     _questionWindow.style.display = "none";
     _scoreboardWindow.style.display = "none";
     _hallOfFame.style.display = "flex";
-    
-    if(inits != undefined){
+
+    _initCol.innerHTML = "<span class='hof-header'>Initials</span>";
+    _scoreCol.innerHTML = "<span class='hof-header'>Score</span>";
+
+    for(let i = 0; i < highScores.length; i++){
         let newInitEl = document.createElement("TR");
-        let newInitData = document.createTextNode(`${inits}`);
+        let newInitData = document.createTextNode(`${highScores[i][0]}`);
         let newScoreEl = document.createElement("TR");
-        let newScoreData = document.createTextNode(`${score}`);
+        let newScoreData = document.createTextNode(`${highScores[i][1]}`);
 
         newInitEl.appendChild(newInitData);
         newScoreEl.appendChild(newScoreData);
@@ -150,10 +180,9 @@ function showHighScores(inits, score) {
         _initCol.appendChild(newInitEl);
         _scoreCol.appendChild(newScoreEl);
     }
-
 }
 
-
+init();
 
 
 
