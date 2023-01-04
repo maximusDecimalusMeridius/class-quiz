@@ -27,6 +27,15 @@ let timer = 200;
 let gameIndex = 0;
 let numCorrect = 0;
 let highScores = [];
+let gameDeck;                   //Declaring gameDeck which is populated with quiz questions at bottom of code
+
+class questionCard {
+    constructor(question, answerArray, correctAnswer){
+        this.question = question;
+        this.answerArray = answerArray;
+        this.correctAnswer = correctAnswer;
+    }
+}
 
 // WHEN I click the start button
 // THEN a timer starts and I am presented with a question
@@ -51,13 +60,8 @@ _viewScoresButton.addEventListener("click", () => {
     showHighScores();
 })
 
-// WHEN I answer a question
-// THEN I am presented with another question
-// function checkAnswer(selected, correct), nextQuestion()
-
 _answerWindow.addEventListener("click", (event) => {
     if(event.target.className === "answer-items"){
-        console.log(event);
         grader(gameIndex, event.target.dataset.val);
         gameIndex++;
         if(gameIndex < gameDeck.length){
@@ -138,12 +142,11 @@ function gameOver(){
 
 // Add new TRs to the high score table
 // Only add a new high score if values are passed, not if user clicks "View High Scores"
-
+// Parse fixed string to float to compare to other high scores
 function tallyScore(inits, time){
     let fixedTime = parseFloat(time.toFixed(2));
 
     if(highScores.length == 0 || fixedTime < highScores[highScores.length - 1][1]) {
-        console.log("TRUE");
         highScores.push([inits, fixedTime]);
     } else if(fixedTime > highScores[0][1]){
         highScores.splice(0, 0, [inits, fixedTime]);
@@ -181,13 +184,14 @@ function showHighScores() {
 }
 
 
-class questionCard {
-    constructor(question, answerArray, correctAnswer){
-        this.question = question;
-        this.answerArray = answerArray;
-        this.correctAnswer = correctAnswer;
-    }
-}
+
+
+
+
+
+
+
+
 
 let question0 = new questionCard(
     "1. Sample Question 1",
@@ -411,4 +415,4 @@ let question19 = new questionCard(
     0
 );
 
-let gameDeck = [question0, question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11, question12, question13, question14, question15, question16, question17, question18, question19];
+gameDeck = [question0, question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11, question12, question13, question14, question15, question16, question17, question18, question19];
