@@ -1,9 +1,11 @@
 :root {
     --green-gradient-shadow: linear-gradient(45deg, hsla(0, 0%, 1%, 1) 0%, hsla(143, 45%, 6%, 1) 11.11111111111111%, hsla(144, 51%, 10%, 1) 22.22222222222222%, hsla(147, 71%, 15%, 1) 33.33333333333333%, hsla(147, 82%, 19%, 1) 44.44444444444444%, hsla(147, 93%, 28%, 1) 55.55555555555556%, hsla(146, 88%, 33%, 1) 66.66666666666666%, hsla(145, 86%, 38%, 1) 77.77777777777777%, hsla(145, 83%, 43%, 1) 88.88888888888889%, hsla(144, 82%, 47%, 1) 100%);
-    --forest-green: #058C42;
+    --forest-green: rgba(5, 140, 66, 1);
+    --light-forest-green: rgb(92, 180, 120);
+    --dark-forest-green: rgb(0, 87, 39);
 }
 
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -123,10 +125,15 @@ header {
     grid-template-columns: auto auto;
 }
 
+#outcome {
+    width: 400px;
+    height: 40px;
+}
+
 .answer-items {
     height: 35px;
     width: 150px;
-    border: 1px solid purple;
+    border: 2px solid black;
     margin: 0 auto;
     list-style-position: inside;
     padding: 5px 0px 0px 5px;
@@ -135,6 +142,35 @@ header {
     color: white;
     font-weight: bold;
     cursor: pointer;
+    position: relative;
+}
+
+.answer-items::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    border: 5px solid transparent;
+    box-shadow: 3px 3px 8px 3px black; 
+    border-radius: inherit;
+    z-index: -1;
+}
+
+.answer-items:hover {
+    background-color: var(--light-forest-green);
+}
+
+.answer-items:active {
+    background-color: var(--forest-green);
+    transform: translate(2px, 2px);
+}
+
+.answer-items:active::after{
+    box-shadow: 2px 2px 5px 3px black;
+    bottom: 0px;
+    right: 0px;
 }
 
 #goodbye-header {

@@ -25,7 +25,6 @@ let _playAgainButton = document.getElementById("play-again-button");
 
 let timer = 200;
 let gameIndex = 0;
-let numCorrect = 0;
 let highScores = [];
 
 // WHEN I click the start button
@@ -53,10 +52,8 @@ _viewScoresButton.addEventListener("click", () => {
 // function checkAnswer(selected, correct), nextQuestion()
 
 _answerWindow.addEventListener("click", (event) => {
-    console.log(event);
-    console.log(event.target);
     if(event.target.className === "answer-items"){
-        event.target.style.backgroundColor = "white";
+        console.log(event);
         grader(gameIndex, event.target.dataset.val);
         gameIndex++;
         if(gameIndex < gameDeck.length){
