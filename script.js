@@ -35,6 +35,7 @@ _startButton.addEventListener("click", () => {
 })
 
 _playAgainButton.addEventListener("click", () => {
+    _hallOfFame.style.display = "none";
     startGame();
 })
 
@@ -44,7 +45,11 @@ _submitButton.addEventListener("click", () => {
 
 _viewScoresButton.addEventListener("click", () => {
     timer = 0;
-    showHighScores();
+    _timer.textContent = 0;
+    _welcomeWindow.style.display = "none";
+    _questionWindow.style.display = "none";
+    _scoreboardWindow.style.display = "none";
+    _hallOfFame.style.display = "flex";
 })
 
 // WHEN I answer a question
@@ -77,10 +82,12 @@ function startGame(){
     _timer.innerText = timer;                                       // Set timer to initialized value
 
    let countDown = setInterval(() => {                              // setInterval function to countdown every 1s
-        if(timer === 0 || gameIndex === gameDeck.length){           // WHEN all questions are answered or the timer reaches 0
+        if(gameIndex === gameDeck.length){           // WHEN all questions are answered or the timer reaches 0
             clearInterval(countDown);                               // THEN the game is over
             gameOver();                                             
-        } else {
+        } else if(timer === 0){
+            clearInterval(countDown);
+        } else{
             timer-=.01;
             _timer.innerText = timer.toFixed(2);
         }
@@ -91,7 +98,7 @@ function startGame(){
 function nextCard(index) {
     _questionNode.innerText = gameDeck[index].question;
     for(let i = 0; i < gameDeck[index].answerArray.length; i++){
-        _answerItemNodes[i].innerText = gameDeck[index].answerArray[i];
+        _answerItemNodes[i].textContent = gameDeck[index].answerArray[i];
         _answerItemNodes[i].style.backgroundColor = "";
     }
 }
@@ -105,7 +112,13 @@ function grader(cardIndex, choice) {
         numCorrect++;
     } else {
         _outcomeNode.innerText = "Wrong-o! 10 seconds subtracted from your time!";
-        timer -= 10;
+        if(timer - 10 < 0){
+            timer = 0;
+            _timer.textContent = timer.toFixed(2);
+        }else {
+            timer -= 10;
+            _timer.textContent = timer.toFixed(2);
+        }
     }
 }
 
@@ -114,7 +127,7 @@ function grader(cardIndex, choice) {
 // THEN I can save my initials and score
 function gameOver(){
     _scoreboardWindow.style.display = "flex";
-    _goodbyeMessageNode.innerText = `Thanks for playing! You got ${numCorrect} correct.\nPlease enter your initials below`;
+    _goodbyeMessageNode.innerText = `Thanks for playing! Your time was ${timer.toFixed(2)}.\nPlease enter your initials below`;
 }
 
 // Add new TRs to the high score table
@@ -161,7 +174,7 @@ class questionCard {
 }
 
 let question0 = new questionCard(
-    "1. Sample Question 0",
+    "1. Sample Question 1",
     [
         "Answer 1",
         "Answer 2",
@@ -172,7 +185,7 @@ let question0 = new questionCard(
 );
 
 let question1 = new questionCard(
-    "2. Sample Question 1",
+    "2. Sample Question 2",
     [
         "Answer 1",
         "Answer 2",
@@ -183,7 +196,7 @@ let question1 = new questionCard(
 );
 
 let question2 = new questionCard(
-    "3. Sample Question 2",
+    "3. Sample Question 3",
     [
         "Answer 1",
         "Answer 2",
@@ -194,7 +207,7 @@ let question2 = new questionCard(
 );
 
 let question3 = new questionCard(
-    "4. Sample Question 3",
+    "4. Sample Question 4",
     [
         "Answer 1",
         "Answer 2",
@@ -205,7 +218,7 @@ let question3 = new questionCard(
 );
 
 let question4 = new questionCard(
-    "5. Sample Question 4",
+    "5. Sample Question 5",
     [
         "Answer 1",
         "Answer 2",
@@ -216,7 +229,7 @@ let question4 = new questionCard(
 );
 
 let question5 = new questionCard(
-    "6. Sample Question 5",
+    "6. Sample Question 6",
     [
         "Answer 1",
         "Answer 2",
@@ -227,7 +240,7 @@ let question5 = new questionCard(
 );
 
 let question6 = new questionCard(
-    "7. Sample Question 6",
+    "7. Sample Question 7",
     [
         "Answer 1",
         "Answer 2",
@@ -238,7 +251,7 @@ let question6 = new questionCard(
 );
 
 let question7 = new questionCard(
-    "8. Sample Question 7",
+    "8. Sample Question 8",
     [
         "Answer 1",
         "Answer 2",
@@ -249,7 +262,7 @@ let question7 = new questionCard(
 );
 
 let question8 = new questionCard(
-    "9. Sample Question 8",
+    "9. Sample Question 9",
     [
         "Answer 1",
         "Answer 2",
@@ -260,7 +273,7 @@ let question8 = new questionCard(
 );
 
 let question9 = new questionCard(
-    "10. Sample Question 9",
+    "10. Sample Question 10",
     [
         "Answer 1",
         "Answer 2",
@@ -271,7 +284,7 @@ let question9 = new questionCard(
 );
 
 let question10 = new questionCard(
-    "11. Sample Question 10",
+    "11. Sample Question 11",
     [
         "Answer 1",
         "Answer 2",
@@ -283,7 +296,7 @@ let question10 = new questionCard(
 
 
 let question11 = new questionCard(
-    "12. Sample Question 11",
+    "12. Sample Question 12",
     [
         "Answer 1",
         "Answer 2",
@@ -294,7 +307,7 @@ let question11 = new questionCard(
 );
 
 let question12 = new questionCard(
-    "13. Sample Question 12",
+    "13. Sample Question 13",
     [
         "Answer 1",
         "Answer 2",
@@ -305,7 +318,7 @@ let question12 = new questionCard(
 );
 
 let question13 = new questionCard(
-    "14. Sample Question 13",
+    "14. Sample Question 14",
     [
         "Answer 1",
         "Answer 2",
@@ -316,7 +329,7 @@ let question13 = new questionCard(
 );
 
 let question14 = new questionCard(
-    "15. Sample Question 14",
+    "15. Sample Question 15",
     [
         "Answer 1",
         "Answer 2",
@@ -328,7 +341,7 @@ let question14 = new questionCard(
 
 
 let question15 = new questionCard(
-    "16. Sample Question 15",
+    "16. Sample Question 16",
     [
         "Answer 1",
         "Answer 2",
@@ -339,7 +352,7 @@ let question15 = new questionCard(
 );
 
 let question16 = new questionCard(
-    "17. Sample Question 16",
+    "17. Sample Question 17",
     [
         "Answer 1",
         "Answer 2",
@@ -350,7 +363,7 @@ let question16 = new questionCard(
 );
 
 let question17 = new questionCard(
-    "18. Sample Question 17",
+    "18. Sample Question 18",
     [
         "Answer 1",
         "Answer 2",
@@ -361,7 +374,7 @@ let question17 = new questionCard(
 );
 
 let question18 = new questionCard(
-    "19. Sample Question 18",
+    "19. Sample Question 19",
     [
         "Answer 1",
         "Answer 2",
@@ -372,7 +385,7 @@ let question18 = new questionCard(
 );
 
 let question19 = new questionCard(
-    "20. Sample Question 19",
+    "20. Sample Question 20",
     [
         "Answer 1",
         "Answer 2",
