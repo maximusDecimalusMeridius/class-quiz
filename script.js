@@ -80,6 +80,7 @@ function init(){
     if(localStorage.getItem("highScores") === null){
         localStorage.setItem("highScores", highScores);
     }
+    console.log(highScores);
 }
 
 // Starts game, initializing counters and indexes
@@ -158,6 +159,7 @@ function tallyScore(inits, time){
             }
         }
     }
+    localStorage.setItem("highScores", JSON.stringify(highScores));
 }
 
 function showHighScores() {    
@@ -168,6 +170,8 @@ function showHighScores() {
 
     _initCol.innerHTML = "<span class='hof-header'>Initials</span>";
     _scoreCol.innerHTML = "<span class='hof-header'>Score</span>";
+
+    highScores = JSON.parse(localStorage.getItem("highScores"));
 
     for(let i = 0; i < highScores.length; i++){
         let newInitEl = document.createElement("TR");
