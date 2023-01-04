@@ -155,8 +155,6 @@ function tallyScore(inits, time){
             }
         }
     }
-
-    localStorage.setItem("highScores", JSON.stringify(highScores));
 }
 
 function showHighScores() {    
@@ -181,17 +179,6 @@ function showHighScores() {
         _scoreCol.appendChild(newScoreEl);
     }
 }
-
-init();
-
-
-
-
-
-
-
-
-
 
 
 class questionCard {
