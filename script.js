@@ -78,7 +78,7 @@ function init(){
     gameIndex = 0;
     numCorrect = 0;
     if(localStorage.getItem("highScores") === null){
-        localStorage.setItem("highScores", highScores);
+        localStorage.setItem("highScores", "");
     }
 }
 
@@ -118,10 +118,10 @@ function nextCard(index) {
 // Subtract 10 seconds from timer for each incorrect question
 function grader(cardIndex, choice) {
     if(choice == gameDeck[cardIndex].correctAnswer){
-        _outcomeNode.innerText = "Correctomundo!";
+        _outcomeNode.innerText = "Correct!";
         numCorrect++;
     } else {
-        _outcomeNode.innerText = "Wrong-o! 10 seconds subtracted from your time!";
+        _outcomeNode.innerText = "Incorrect! 10 seconds subtracted from your time.";
         if(timer - 10 < 0){
             timer = 0;
             _timer.textContent = timer.toFixed(2);

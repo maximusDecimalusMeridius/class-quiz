@@ -3,13 +3,16 @@
     --forest-green: rgba(5, 140, 66, 1);
     --light-forest-green: rgb(92, 180, 120);
     --dark-forest-green: rgb(0, 87, 39);
+
+    --off-white: #f2f1f0ff;                            /*cultured*/
+    --gray-header: #635B62;
+    --purple: #F55F76;
 }
 
 *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: 1px solid blue;
 }
 
 img, video * {
@@ -17,10 +20,17 @@ img, video * {
     height: 100%;
 }
 
+html {
+    min-width: 330px;
+}
+
 body {
     width: 60%;
-    margin: 0 auto;
-    background-color: rgb(237, 242, 244);
+    margin: 25px auto 0px auto;
+    background-color: var(--off-white);
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
+    border: 5px solid var(--gray-header);
+    border-radius: 15px;
 }
 
 header {
@@ -28,7 +38,21 @@ header {
     height: 50px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 0px 20px;
+    background-color: var(--gray-header);
+    color: var(--off-white);
+    font-weight: bold;
+}
+
+#view-scores {
+    width: 150px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: var(--purple);
 }
 
 #timer {
@@ -37,11 +61,6 @@ header {
     height: 25px;
     padding-top: 2px;
     text-align: center;
-}
-
-.header-items {
-    width: fit-content;
-    padding-top: 15px;
 }
 
 .main-window {
@@ -57,9 +76,10 @@ header {
 }
 
 .card-title {
-    width: 80%;
-    height: 50px;
-    font-size: 28px;
+    width: fit-content;
+    max-width: 90%;
+    height: 200px;
+    font-size: 32px;
     text-align: center;
     font-style: italic;
     padding-top: 15px;
@@ -99,6 +119,10 @@ header {
 /* Hide windows on index.html load */
 #question-window {
     display: none;
+}
+
+#question {
+    text-align: left;
 }
 
 #scoreboard-window {
@@ -225,7 +249,7 @@ header {
     }
 
     .card-title {
-        font-size: 20px;
+        font-size: 28px;
     }
 
     #answer-window {
@@ -237,6 +261,10 @@ header {
         align-items: center;
         padding-top: 5px;
         gap: 10px;
+    }
+
+    #outcome {
+        width: 200px;
     }
 
     .answer-items {

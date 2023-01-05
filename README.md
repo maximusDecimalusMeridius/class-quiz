@@ -10,6 +10,11 @@ This is a class assignment that required us to make a timed quiz that stores hig
 -WHEN all questions are answered or the timer reaches 0, THEN the game is over
 -WHEN the game is over, THEN I can save my initials and score
 
+## Edge Cases Tested
+
+-New user visits page for the first time
+-User plays the game, then actively deletes localStorage var, starting a new game before reloading or visiting again
+
 ## Table of Contents
 
 - [Installation](#installation)
