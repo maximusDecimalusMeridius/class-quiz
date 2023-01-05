@@ -447,7 +447,6 @@ let question14 = new questionCard(
     0
 );
 
-
 let question15 = new questionCard(
     "16. The question is the answer",
     [
@@ -482,7 +481,7 @@ let question17 = new questionCard(
 );
 
 let question18 = new questionCard(
-    "19. ",
+    "19. Guess!",
     [
         "A",
         "B",
