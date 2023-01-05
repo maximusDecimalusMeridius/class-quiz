@@ -1,12 +1,12 @@
 :root {
     --green-gradient-shadow: linear-gradient(45deg, hsla(0, 0%, 1%, 1) 0%, hsla(143, 45%, 6%, 1) 11.11111111111111%, hsla(144, 51%, 10%, 1) 22.22222222222222%, hsla(147, 71%, 15%, 1) 33.33333333333333%, hsla(147, 82%, 19%, 1) 44.44444444444444%, hsla(147, 93%, 28%, 1) 55.55555555555556%, hsla(146, 88%, 33%, 1) 66.66666666666666%, hsla(145, 86%, 38%, 1) 77.77777777777777%, hsla(145, 83%, 43%, 1) 88.88888888888889%, hsla(144, 82%, 47%, 1) 100%);
-    --forest-green: rgba(5, 140, 66, 1);
-    --light-forest-green: rgb(92, 180, 120);
+    --forest-green: #6F4B73;
+    --light-forest-green: #C467C7;
     --dark-forest-green: rgb(0, 87, 39);
 
     --off-white: #f2f1f0ff;                            /*cultured*/
     --gray-header: #635B62;
-    --purple: #F55F76;
+    --pink: #F55F76;
 }
 
 *, *::before, *::after {
@@ -52,7 +52,7 @@ header {
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    background-color: var(--purple);
+    background-color: var(--pink);
 }
 
 #timer {
@@ -122,6 +122,7 @@ header {
 }
 
 #question {
+    width: 100%;
     text-align: left;
 }
 
@@ -160,6 +161,7 @@ header {
     border: 2px solid black;
     margin: 0 auto;
     list-style-position: inside;
+    list-style-type: none;
     border-radius: 10px;
     background-color: var(--forest-green);
     color: white;
@@ -200,25 +202,28 @@ header {
 
 #goodbye-header {
     text-align: left;
+    height: 50px;
 }
 
 #goodbye-p {
+    width: 350px;
     padding: 3px;
 }
 
 #goodbye-footer {
-    width: 250px;
+    width: 350px;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
+    gap: 20px;
 }
 
 #initials {
     display: inline-block;
-    height: 25px;
-    width: 50px;
+    height: 35px;
+    width: 55px;
     text-align: center;
-    padding-top: 2px;
+    padding-top: 5px;
     font-size: 18px;
     font-weight: bold;
     resize: none;
@@ -242,6 +247,11 @@ header {
     font-weight: bold;
     text-align: left;
 }
+
+#x {
+    cursor: pointer;
+}
+
 
 @media screen and (max-width: 820px){
     body {
@@ -280,3 +290,8 @@ header {
     }
 }
 
+@media screen and (max-width: 500px){
+    #goodbye-p, #goodbye-footer  {
+        width: 100%;
+    }
+}
