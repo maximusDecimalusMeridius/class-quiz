@@ -4,16 +4,15 @@
 
 This is a class assignment that required us to make a timed quiz that stores high scores in localStorage.  It has the following acceptance criteria:
 
--WHEN I click the start button, THEN a timer starts and I am presented with a question
--WHEN I answer a question, THEN I am presented with another question
--WHEN I answer a question incorrectly, THEN time is subtracted from the clock
--WHEN all questions are answered or the timer reaches 0, THEN the game is over
--WHEN the game is over, THEN I can save my initials and score
+- WHEN I click the start button, THEN a timer starts and I am presented with a question
+- WHEN I answer a question, THEN I am presented with another question
+- WHEN I answer a question incorrectly, THEN time is subtracted from the clock
+- WHEN all questions are answered or the timer reaches 0, THEN the game is over
+- WHEN the game is over, THEN I can save my initials and score
 
-## Edge Cases Tested
+### Easter Eggs
 
--New user visits page for the first time
--User plays the game, then actively deletes localStorage var, starting a new game before reloading or visiting again
+Note: Some questions contain easter eggs and may change the location of a correct answer or how the user interacts with the quiz.  These are not bugs and should be a fun way to add some interactivity to the game.
 
 ## Table of Contents
 
@@ -36,7 +35,7 @@ You can visit the live application at - https://maximusdecimalusmeridius.github.
 
 ## Credits
 
-N/A
+Background art created with [Midjourney AI](https://www.midjourney.com "Visit midjourney.com")
 
 ## License
 
