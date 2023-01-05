@@ -4,9 +4,10 @@
     --light-forest-green: #C467C7;
     --dark-forest-green: rgb(0, 87, 39);
 
-    --off-white: #f2f1f0ff;                            /*cultured*/
-    --gray-header: #635B62;
-    --pink: #F55F76;
+    --off-white: rgb(242, 241, 240);                            /*cultured*/
+    --gray-header: rgb(99, 91, 98);
+    --pink: #f55f76;                                            /*Changed to hex for trivia question*/
+    --purple: rgb(111, 75, 115);
 }
 
 *, *::before, *::after {
@@ -95,6 +96,7 @@ header {
     font-weight: bold;
     position: relative;
     cursor: pointer;
+    border: 0px;
 }
 
 #start-button:hover::after {
@@ -148,6 +150,7 @@ header {
     display: grid;
     padding-top: 20px;
     grid-template-columns: auto auto;
+    color: white;
 }
 
 #outcome {
@@ -164,7 +167,7 @@ header {
     list-style-type: none;
     border-radius: 10px;
     background-color: var(--forest-green);
-    color: white;
+    color: inherit;
     font-weight: bold;
     cursor: pointer;
     position: relative;

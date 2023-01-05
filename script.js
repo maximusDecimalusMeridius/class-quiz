@@ -72,6 +72,7 @@ function init(){
     timer = 200;
     gameIndex = 0;
     numCorrect = 0;
+    _outcomeNode.textContent = "";
     if(localStorage.getItem("highScores") == null){
         localStorage.setItem("highScores", "");
         highScores = [];
@@ -150,10 +151,10 @@ function nextCard(index) {
         document.getElementById("answer-window").addEventListener("mouseover", (event) => {
             if(event.target.className === "answer-items" && event.target.innerText == "X"){
                 let lastIndex = event.target.dataset.val;
-                let rando = Math.floor(Math.random() * 4);
+                let rando = Math.floor(Math.random() * _answerItemNodes.length);
                 event.target.innerText = "";
                 while(rando == lastIndex){
-                    rando = Math.floor(Math.random() * 4);
+                    rando = Math.floor(Math.random() * _answerItemNodes.length);
                 }
                 _answerItemNodes[rando].innerText = "X";
             }
@@ -171,6 +172,23 @@ function nextCard(index) {
                 _answerItemNodes[3].innerText = (200 - parseFloat(timer.toFixed(2))).toFixed(2);
             }
         }, "10")
+    }
+
+    if(index == 14){
+        let rando = Math.floor(Math.random() * _answerItemNodes.length);
+        for(let i = 0; i < _answerItemNodes.length; i++){
+            if(i == rando){
+                _answerItemNodes[i].textContent = "Correct Answer";
+                gameDeck[gameIndex].correctAnswer = i;
+            } else {
+                _answerItemNodes[i].textContent = "An Answer";
+            }
+        _answerWindow.style.color = "var(--purple)";
+        }
+    }
+    if(index == 15){
+        _answerWindow.style.color = "white";
+
     }
 }
 
@@ -378,9 +396,9 @@ let question10 = new questionCard(
     "11. Precisely how much time do you have left?",
     [
         "TONS of time",
-        "filler",
+        "",
         "Doesn't Matter!",
-        "filler",
+        "",
     ],
     1
 );
@@ -420,24 +438,24 @@ let question13 = new questionCard(
 );
 
 let question14 = new questionCard(
-    "15. Sample Question 15",
+    "15. Lots of answers, only one is correct",
     [
-        "Answer 1",
-        "Answer 2",
-        "Answer 3",
-        "Answer 4",
+        "",
+        "",
+        "",
+        "",
     ],
     0
 );
 
 
 let question15 = new questionCard(
-    "16. Sample Question 16",
+    "16. The question is the answer",
     [
-        "Answer 1",
-        "Answer 2",
-        "Answer 3",
-        "Answer 4",
+        "Which question?",
+        "Enough of this",
+        "Why I oughta...",
+        "...",
     ],
     0
 );
