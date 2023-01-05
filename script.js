@@ -80,7 +80,6 @@ function init(){
     if(localStorage.getItem("highScores") === null){
         localStorage.setItem("highScores", highScores);
     }
-    console.log(highScores);
 }
 
 // Starts game, initializing counters and indexes
@@ -171,22 +170,30 @@ function showHighScores() {
     _initCol.innerHTML = "<span class='hof-header'>Initials</span>";
     _scoreCol.innerHTML = "<span class='hof-header'>Score</span>";
 
-    highScores = JSON.parse(localStorage.getItem("highScores"));
+    
+    if(localStorage.getItem("highScores") == ""){
+        alert("Be the first to play!");
+    } else {
+        highScores = JSON.parse(localStorage.getItem("highScores"));
+        
+        for(let i = 0; i < highScores.length; i++){
+            let newInitEl = document.createElement("TR");
+            let newInitData = document.createTextNode(`${highScores[i][0]}`);
+            let newScoreEl = document.createElement("TR");
+            let newScoreData = document.createTextNode(`${highScores[i][1]}`);
 
-    for(let i = 0; i < highScores.length; i++){
-        let newInitEl = document.createElement("TR");
-        let newInitData = document.createTextNode(`${highScores[i][0]}`);
-        let newScoreEl = document.createElement("TR");
-        let newScoreData = document.createTextNode(`${highScores[i][1]}`);
+            newInitEl.appendChild(newInitData);
+            newScoreEl.appendChild(newScoreData);
 
-        newInitEl.appendChild(newInitData);
-        newScoreEl.appendChild(newScoreData);
-
-        _initCol.appendChild(newInitEl);
-        _scoreCol.appendChild(newScoreEl);
+            _initCol.appendChild(newInitEl);
+            _scoreCol.appendChild(newScoreEl);
+        }
     }
 }
 
+if(localStorage.getItem("highScores") === null){
+    localStorage.setItem("highScores", highScores);
+}
 
 
 
