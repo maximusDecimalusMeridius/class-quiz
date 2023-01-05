@@ -217,7 +217,7 @@ function grader(cardIndex, choice) {
 function gameOver(){
     _questionWindow.style.display = "none";
     _scoreboardWindow.style.display = "flex";
-    _goodbyeMessageNode.innerText = `Thanks for playing! You got ${numCorrect} correct out of ${gameDeck.length}.\nYour time was ${timer.toFixed(2)}.\nPlease enter your initials below`;
+    _goodbyeMessageNode.innerText = `Thanks for playing! You got ${numCorrect} correct out of ${gameDeck.length}.\nYour time was ${timer.toFixed(2)}.\nEnter your initials to see if you're in the Top Ten!`;
 }
 
 // Add new TRs to the high score table
@@ -240,7 +240,11 @@ function tallyScore(inits, time){
         }
     }
 
-    localStorage.setItem("highScores", JSON.stringify(highScores)); // bug
+    if(highScores.length > 10){
+        localStorage.setItem("highScores", JSON.stringify(highScores.splice(0, 10)));
+    } else {
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+    }
 }
 
 function showHighScores() {    
