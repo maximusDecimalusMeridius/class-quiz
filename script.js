@@ -75,13 +75,10 @@ function init(){
     if(localStorage.getItem("highScores") == null){
         localStorage.setItem("highScores", "");
         highScores = [];
-    } else {
-        highScores = JSON.parse(localStorage.getItem("highScores"));
     }
-    
-    // if(localStorage.getItem("highScores") === null){
-    //     localStorage.setItem("highScores", "");
-    // }
+    if(localStorage.getItem("highScores") != ""){
+        highScores = JSON.parse(localStorage.getItem("highScores"));
+    } 
 }
 
 //clicking an element with the answer-items class calls grader to compare answer vs selection, then increments gameIndex
@@ -225,6 +222,7 @@ function tallyScore(inits, time){
             }
         }
     }
+
     localStorage.setItem("highScores", JSON.stringify(highScores)); // bug
 }
 
