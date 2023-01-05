@@ -188,7 +188,6 @@ function nextCard(index) {
     }
     if(index == 15){
         _answerWindow.style.color = "white";
-
     }
 }
 
@@ -196,7 +195,7 @@ function nextCard(index) {
 // Tally correct answers
 // Subtract 10 seconds from timer for each incorrect question
 function grader(cardIndex, choice) {
-    if(choice == gameDeck[cardIndex].correctAnswer){
+    if(choice == gameDeck[cardIndex].correctAnswer || gameDeck[cardIndex].correctAnswer == "any"){
         _outcomeNode.innerText = "Correct!";
         numCorrect++;
     } else {
@@ -461,47 +460,47 @@ let question15 = new questionCard(
 );
 
 let question16 = new questionCard(
-    "17. Sample Question 17",
+    "17. If you're happy and you know it...",
     [
-        "Answer 1",
-        "Answer 2",
-        "Answer 3",
-        "Answer 4",
+        "Clap your hands",
+        "Flap your wangs",
+        "Flash your fangs",
+        "It's this one",
     ],
-    0
+    3
 );
 
 let question17 = new questionCard(
-    "18. Sample Question 18",
+    "18. A common myth suggests you should pick this choice for multiple choice questions you don't know the answer to:",
     [
-        "Answer 1",
-        "Answer 2",
-        "Answer 3",
-        "Answer 4",
+        "A",
+        "B",
+        "C",
+        "D",
     ],
-    0
+    2
 );
 
 let question18 = new questionCard(
-    "19. Sample Question 19",
+    "19. ",
     [
-        "Answer 1",
-        "Answer 2",
-        "Answer 3",
-        "Answer 4",
+        "A",
+        "B",
+        "C",
+        "D",
     ],
-    0
+    2
 );
 
 let question19 = new questionCard(
-    "20. Sample Question 20",
+    '20. Last one is a gimme, click any answer!',
     [
-        "Answer 1",
-        "Answer 2",
-        "Answer 3",
-        "Answer 4",
+        "This one",
+        "Or this one",
+        "Literally any",
+        "This one?",
     ],
-    0
+    "any"
 );
 
 gameDeck = [question0, question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11, question12, question13, question14, question15, question16, question17, question18, question19];
