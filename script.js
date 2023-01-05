@@ -72,7 +72,10 @@ function init(){
     timer = 200;
     gameIndex = 0;
     numCorrect = 0;
-    if(localStorage.getItem("highScores") != ""){
+    if(localStorage.getItem("highScores") == null){
+        localStorage.setItem("highScores", "");
+        highScores = [];
+    } else {
         highScores = JSON.parse(localStorage.getItem("highScores"));
     }
     
@@ -208,15 +211,16 @@ function gameOver(){
 // Parse fixed string to float to compare to other high scores
 function tallyScore(inits, time){
     let fixedTime = parseFloat(time.toFixed(2));
+    let initials = (inits != "" ? inits : "N/A");
 
     if(highScores.length == 0 || fixedTime < highScores[highScores.length - 1][1]) {
-        highScores.push([inits, fixedTime]);
+        highScores.push([initials, fixedTime]);
     } else if(fixedTime > highScores[0][1]){
-        highScores.splice(0, 0, [inits, fixedTime]);
+        highScores.splice(0, 0, [initials, fixedTime]);
     } else {
         for(let i = 1; i < highScores.length; i++){
             if(fixedTime > highScores[i][1]){
-                highScores.splice(i, 0, [inits, fixedTime]);
+                highScores.splice(i, 0, [initials, fixedTime]);
                 break;
             }
         }
